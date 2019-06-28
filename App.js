@@ -18,6 +18,15 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+
+  setTimeout(render() => {
+    return (
+      <View style={styles.container}>
+        <Image style={styles.image} source={require ('./images/Logo.png')} />
+      </View>
+    );
+  }, 1000);
+
   render() {
     return (
       <View style={styles.container}>
