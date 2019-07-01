@@ -8,18 +8,17 @@ import { name as appName } from './app.json';
 import { DrawerNavigator } from 'react-navigation';
 import React, { Component } from "react";
 import HomeScreen from "./src/HomeScreen/HomeScreen.js";
-import MainScreenNavigator from "./src/HomeScreen/HomeScreen";
-import ProfileScreen from "./src/HomeScreen/HomeScreen";
+import Cart from "./src/Cart/Cart.js";
 import SideBar from "./src/SideBar/SideBar.js";
-import { createDrawerNavigator, createAppContainer } from "react-navigation";
+import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 
-const HomeScreenRouter = createDrawerNavigator(
-    {
-        Home: { screen: HomeScreen },
-        Chat: { screen: MainScreenNavigator },
-        ProfileScreen: { screen: ProfileScreen }
-    }
-);
-export default createAppContainer(HomeScreenRouter);
+const MainNavigator = createStackNavigator({
+    Home: {screen: HomeScreen},
+    Cart: {screen: Cart},
+  });
+  
+  const AppNav = createAppContainer(MainNavigator);
+  
+  export default AppNav;
 AppRegistry.registerComponent(appName, () => App);
