@@ -24,12 +24,9 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
-  render() {
-    return (
-      <Button
-        title="McDonald's"
-        onPress={() => this.props.navigation.navigate('HomeScreen')}
-      />
+  render () {
+    return(
+      <Home/>
     );
   }
 }
