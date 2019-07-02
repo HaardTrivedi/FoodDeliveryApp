@@ -27,7 +27,10 @@ export default class HomeScreen extends React.Component {
        lunch: false,
        dinner: false,
        snacks: false,
-       drinks: false
+       drinks: false,
+       items: ["a", "b"],
+       prices: ["3","4.65"],
+       quantities: ["2","3"]
     }
  }
  static navigationOptions = {
@@ -105,7 +108,7 @@ export default class HomeScreen extends React.Component {
             style = {{justifyContent: 'center',
             alignItems: 'center',
             alignSelf:'center'}}
-            onPress= {()=>{navigate('Cart', {item:"Cheeseburger", price:"4.5", quantity:"2"})}}
+            onPress= {()=>{navigate('Cart', {item:this.state.items, price:this.state.prices, quantity:this.state.quantities})}}
           />
         </View>
       </Container>

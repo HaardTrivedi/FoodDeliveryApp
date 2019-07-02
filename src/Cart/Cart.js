@@ -18,10 +18,12 @@ import styles from "../styles"
 import CartItem from "./cartItem.js"
 function generateItems(navigation){
     var items = [];
-    const itemIn = navigation.getParam('item', "test");
-    const priceIn = navigation.getParam('price', "3");
-    const quantityIn = navigation.getParam('quantity', "4");
-    items.push(<CartItem item = {itemIn} quantity = {quantityIn} price = {priceIn}/>)
+    const itemIn = navigation.getParam('item', []);
+    const priceIn = navigation.getParam('price', []);
+    const quantityIn = navigation.getParam('quantity', []);
+    for (var i = 0; i<itemIn.length; i++){
+        items.push(<CartItem item = {itemIn[i]} quantity = {quantityIn[i]} price = {priceIn[i]}/>)
+    }
     return items;
 }
 export default class HomeScreen extends React.Component {
