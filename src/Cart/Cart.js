@@ -15,13 +15,21 @@ import {
   Button as ButtonNB
 } from "native-base";
 import styles from "../styles"
-import { CheckBox } from 'react-native-elements'
-
+import CartItem from "./cartItem.js"
+function generateItems(navigation){
+    var items = [];
+    const itemIn = navigation.getParam('item', "test");
+    const priceIn = navigation.getParam('price', "3");
+    const quantityIn = navigation.getParam('quantity', "4");
+    items.push(<CartItem item = {itemIn} quantity = {quantityIn} price = {priceIn}/>)
+    return items;
+}
 export default class HomeScreen extends React.Component {
+    
   constructor() {
     super()
     this.state = {
-        emptyCart: "No items added",
+        
     }
  }
  
@@ -29,6 +37,8 @@ export default class HomeScreen extends React.Component {
     title: 'Cart',
   };
   render() {
+      
+    const { navigation } = this.props;
     return (
       <Container>
         {/* <Header style = {{backgroundColor: "darkred"}}>
@@ -45,9 +55,17 @@ export default class HomeScreen extends React.Component {
           </Body>
           <Right />
         </Header> */}
-        <Text style = {{textAlign:"center"}}>
-            {this.state.emptyCart}
-        </Text>
+        {generateItems(navigation)}
+        <View style = {styles.cartItem}>
+            <View style = {styles.cartItemDetails}>
+                <Text style = {styles.itemDetailsText}>
+                    Total
+                </Text>
+            </View>
+            <View style = {styles.cartItemCost}>
+                <Text style = {styles.costText}>Test</Text>
+            </View>
+        </View>
       </Container>
     );
   }

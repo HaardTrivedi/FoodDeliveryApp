@@ -9,7 +9,6 @@ import { DrawerNavigator } from 'react-navigation';
 import React, { Component } from "react";
 import HomeScreen from "./src/HomeScreen/HomeScreen.js";
 import Cart from "./src/Cart/Cart.js";
-import SideBar from "./src/SideBar/SideBar.js";
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 

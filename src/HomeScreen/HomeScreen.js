@@ -105,7 +105,7 @@ export default class HomeScreen extends React.Component {
             style = {{justifyContent: 'center',
             alignItems: 'center',
             alignSelf:'center'}}
-            onPress= {()=>{navigate('Cart')}}
+            onPress= {()=>{navigate('Cart', {item:"Cheeseburger", price:"4.5", quantity:"2"})}}
           />
         </View>
       </Container>
