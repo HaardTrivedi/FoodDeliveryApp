@@ -9,12 +9,16 @@ import { DrawerNavigator } from 'react-navigation';
 import React, { Component } from "react";
 import HomeScreen from "./src/HomeScreen/HomeScreen.js";
 import Cart from "./src/Cart/Cart.js";
+import Restaurants from "./src/RestaurantList.js"
+import Menu from "./src/Menu.js"
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 
 const MainNavigator = createStackNavigator({
     Home: { screen: HomeScreen },
     Cart: { screen: Cart },
+    Restaurants: {screen: Restaurants},
+    Menu: {screen: Menu}
 });
 
 const AppNav = createAppContainer(MainNavigator);

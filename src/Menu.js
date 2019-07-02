@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, ScrollView, Image, TextInput, Switch } from 'react-native';
-import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
+import { Platform, Button, StyleSheet, Text, View, ScrollView, Image, TextInput, Switch } from 'react-native';
+import { Container, Card, CardItem, Content, Icon, Header, Left, Body, Right, Title } from 'native-base';
 
-type Props = {};
-export default class Restaurants extends Component<Props> {
+export default class HomeScreen extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+          items: ["a", "b"],
+          prices: ["3", "4.65"],
+          quantities: ["2", "3"]
+        }
+      }
+
+    static navigationOptions = {
+        title: 'Menu',
+    };
+
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <Container>
-                <Header>
-                    <Body>
-                        <Title>Menu</Title>
-                        <Button id='mcdonalds'>Fries</Button>
-                    </Body>
-                </Header>
+                <View style={styles.buttons}>
+                    <Button
+                        title="Fries"
+                        color="darkred"
+                        style={styles.buttons}
+                        onPress= {()=>{navigate('Cart', {item:this.state.items, price:this.state.prices, quantity:this.state.quantities})}}
+                    ></Button>
+
+                </View>
             </Container>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    image: {
-        width: 125,
-        height: 125
-    },
-})
 
