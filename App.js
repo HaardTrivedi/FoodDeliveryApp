@@ -27,8 +27,8 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Button
-        onPress={() => this.props.navigation.navigate('HomeScreen')}
         title="McDonald's"
+        onPress={() => this.props.navigation.navigate('HomeScreen')}
       />
     );
   }

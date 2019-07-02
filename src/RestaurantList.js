@@ -10,7 +10,7 @@ export default class Restaurants extends React.Component {
                 <Title>Restaurant List</Title>
                 <Button
                     onPress={() => this.props.navigation.navigate('./HomeScreen/HomeScreen.js')}
-                    title="McDonald's" 
+                    title="McDonald's"
                 />
             </Body>
         );
