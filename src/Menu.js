@@ -1,35 +1,148 @@
 import React, { Component } from 'react';
-import { Platform, Button, StyleSheet, Text, View, ScrollView, Image, TextInput, Switch } from 'react-native';
+import { Platform, ToastAndroid, Button, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Container, Card, CardItem, Content, Icon, Header, Left, Body, Right, Title } from 'native-base';
+import Modal from './CartModal'
 
 export default class HomeScreen extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-          items: ["a", "b"],
-          prices: ["3", "4.65"],
-          quantities: ["2", "3"]
+            isOpen: false,
+            items: [],
+            prices: [],
+            quantities: [],
         }
-      }
+    }
+
+    toggleModal = () => {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
 
     static navigationOptions = {
         title: 'Menu',
     };
 
+    showToast = () => {
+        ToastAndroid.show(
+            'Item Added to Cart',
+            ToastAndroid.SHORT,
+          );
+    }
+
+    addItems = () => {
+        items
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <Container>
-                <View style={styles.buttons}>
-                    <Button
-                        title="Fries"
-                        color="darkred"
-                        style={styles.buttons}
-                        onPress= {()=>{navigate('Cart', {item:this.state.items, price:this.state.prices, quantity:this.state.quantities})}}
-                    ></Button>
+            <ScrollView>
+                <Container>
+                    <View style={styles.foodItem}>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+                            <View>
+                                <Text style={styles.restaurantText}> Cheeseburger </Text>
+                            </View>
+                            <View>
+                                <Text style={styles.restaurantText}> $4.50 </Text>
+                            </View>
+                        </View>
+                        <Button
+                            title='Add to Cart'
+                            style={styles.btnAddToCart}
+                            color='grey'
+                            onPress={() => { navigate('Payment') }}
+                        />
+                    </View>
 
-                </View>
-            </Container>
+                    <View style={styles.foodItem}>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+                            <View>
+                                <Text style={styles.restaurantText}> Junior Chicken </Text>
+                            </View>
+                            <View>
+                                <Text style={styles.restaurantText}> $4.95 </Text>
+                            </View>
+                        </View>
+                        <Button
+                            title='Add to Cart'
+                            style={{
+                                justifyContent: 'stretch',
+                                alignItems: 'center',
+                                alignSelf: 'center',
+                                paddingTop: 10
+                            }}
+                            color='grey'
+                        />
+                    </View>
+                    <View style={styles.foodItem}>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+                            <View>
+                                <Text style={styles.restaurantText}> Fries </Text>
+                            </View>
+                            <View>
+                                <Text style={styles.restaurantText}> $2.00 </Text>
+                            </View>
+                        </View>
+                        <Button
+                            title='Add to Cart'
+                            style={styles.btnAddToCart}
+                            color='grey'
+                        />
+                    </View>
+                    <View style={styles.foodItem}>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+                            <View>
+                                <Text style={styles.restaurantText}> Drink </Text>
+                            </View>
+                            <View>
+                                <Text style={styles.restaurantText}> $1.99 </Text>
+                            </View>
+                        </View>
+                        <Button
+                            title='Add to Cart'
+                            style={styles.btnAddToCart}
+                            color='grey'
+                        />
+                    </View>
+                    <View style={styles.foodItem}>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+                            <View>
+                                <Text style={styles.restaurantText}> Apple Pie </Text>
+                            </View>
+                            <View>
+                                <Text style={styles.restaurantText}> $1.29 </Text>
+                            </View>
+                        </View>
+                        <Button
+                            title='Add to Cart'
+                            style={styles.btnAddToCart}
+                            color='grey'
+                        />
+                    </View>
+                    <View style={styles.foodItem}>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
+                            <View>
+                                <Text style={styles.restaurantText}> Chicken Nuggets </Text>
+                            </View>
+                            <View>
+                                <Text style={styles.restaurantText}> $2.99 </Text>
+                            </View>
+                        </View>
+                        <Button
+                            title='Add to Cart'
+                            style={styles.btnAddToCart}
+                            color='grey'
+                        />
+                    </View>
+                </Container>
+                <Modal show={this.state.isOpen}
+                    onClose={this.toggleModal}>
+                    Here's some content for the modal
+                </Modal>
+            </ScrollView>
         );
     }
 }
