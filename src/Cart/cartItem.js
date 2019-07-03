@@ -44,7 +44,7 @@ export default class CartItem extends React.Component {
                     {itemDetails}
                 </Text>
                 <View  style = {styles.cartItemRemove}>
-                    <Button title = {"Remove"} color = {"darkred"}/>
+                    <Button title = {"Remove"} color = {"darkred"} onPress = {this.props.onPress}/>
                 </View>
             </View>
             <View style = {styles.cartItemCost}>
