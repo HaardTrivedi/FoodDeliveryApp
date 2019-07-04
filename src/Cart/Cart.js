@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, View, Picker, TextInput, Button} from "react-native";
+import { StatusBar, View, Picker, TextInput, Button, ScrollView} from "react-native";
 import {
   Text,
   Container,
@@ -16,6 +16,8 @@ import {
 } from "native-base";
 import styles from "../styles"
 import CartItem from "./cartItem.js"
+import { NavigationEvents } from "react-navigation";
+
 
 function appendZero(num){
     var strCombined = String(num).split(".");
@@ -31,48 +33,56 @@ function appendZero(num){
     return strCombined;
 }
 
-function generateItems(navigation){
-    var items = [];
-    const itemIn = navigation.getParam('item', []);
-    const priceIn = navigation.getParam('price', []);
-    const quantityIn = navigation.getParam('quantity', []);
-    var total = 0
-    for (var i = 0; i<itemIn.length; i++){
-        var combined = parseFloat(priceIn[i])*quantityIn[i];
-        combined = parseFloat(combined.toFixed(2));
-        total+=combined;
-        items.push(<CartItem item = {itemIn[i]} quantity = {quantityIn[i]} price = {priceIn[i]} onPress = {removeItem(i)}/>)
-    }
-    return items;
-}
+// function generateItems(){
+//     var items = [];
+//     global.cart.forEach(item => {
+//         var combined = parseFloat(item.price)*item.num;
+//         combined = parseFloat(combined.toFixed(2));
+//         items.push(<CartItem item = {item.name} quantity = {item.num} price = {item.price} onPress = {()=>removeItem(item.name)}/>)
+//     });
+//     return items;
+// }
 export default class HomeScreen extends React.Component {
   constructor() {
     super()
+    var temp = this.generateItems()
     this.state = {
-        total:0,
-        items:[]
+        total:temp[1],
+        items:temp[0]
     }
  }
  
  static navigationOptions = {
     title: 'Cart',
   };
-  calcTotal = (navigation)=>{
-  const itemIn = navigation.getParam('item', []);
-  const priceIn = navigation.getParam('price', []);
-  const quantityIn = navigation.getParam('quantity', []);
-  var total = 0
-  for (var i = 0; i<itemIn.length; i++){
-      var combined = parseFloat(priceIn[i])*quantityIn[i];
-      combined = parseFloat(combined.toFixed(2));
-      total+=combined;}
-  return total;
+removeItem(id){
+  for( var i = 0; i < global.cart.length; i++){ 
+    if ( global.cart[i].name == id) {
+      global.cart.splice(i, 1); 
+    }
+ }
+ var temp = this.generateItems()
+ this.setState({items:temp[0]})
+ this.setState({total:temp[1]})
 }
+generateItems = ()=>{
+  var items = [];
+  var total = 0
+  global.cart.forEach(item => {
+      var combined = parseFloat(item.price)*item.num;
+      combined = parseFloat(combined.toFixed(2));
+      total+=combined;
+      items.push(<CartItem item = {item.name} quantity = {item.num} price = {item.price} onPress = {()=>this.removeItem(item.name)}/>)
+  });
+  return [items,appendZero(total.toFixed(2))];
+}
+
   render() {
       
-    const { navigation } = this.props;
+    const { navigate } = this.props.navigation;
     return (
       <Container>
+        <ScrollView>
         {/* <Header style = {{backgroundColor: "darkred"}}>
           <Left>
             <ButtonNB
@@ -87,7 +97,7 @@ export default class HomeScreen extends React.Component {
           </Body>
           <Right />
         </Header> */}
-        {generateItems(navigation)}
+        {this.state.items}
         <View style = {styles.cartItem}>
             <View style = {styles.cartItemDetails}>
                 <Text style = {styles.itemDetailsText}>
@@ -95,9 +105,13 @@ export default class HomeScreen extends React.Component {
                 </Text>
             </View>
             <View style = {styles.cartItemCost}>
-                <Text style = {styles.costText}>{appendZero(this.calcTotal(navigation))}</Text>
+                <Text style = {styles.costText}>{this.state.total}</Text>
             </View>
         </View>
+        <View style = {{paddingTop:9}}>
+        <Button title = {"Checkout"} color = {"darkred"} onPress = {()=>{navigate("Payment")}}/>
+        </View> 
+        </ScrollView>
       </Container>
     );
   }

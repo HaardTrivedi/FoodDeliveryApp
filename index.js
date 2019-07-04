@@ -13,7 +13,7 @@ import Restaurants from "./src/RestaurantList.js"
 import Menu from "./src/Menu.js"
 import Payment from "./src/PaymentScreen.js"
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const MainNavigator = createStackNavigator({
     Home: { screen: HomeScreen },
@@ -21,7 +21,7 @@ const MainNavigator = createStackNavigator({
     Restaurants: {screen: Restaurants},
     Menu: {screen: Menu},
     Payment: {screen: Payment},
-});
+}, {headerMode:"float"});
 
 const AppNav = createAppContainer(MainNavigator);
 

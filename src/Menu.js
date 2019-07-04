@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Platform, ToastAndroid, Button, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
-import { Container, Card, CardItem, Content, Icon, Header, Left, Body, Right, Title } from 'native-base';
+import { Container, Card, CardItem, Content, Header, Left, Body, Right, Title } from 'native-base';
+import {Button as ButtonE} from "react-native-elements";
 import Modal from './CartModal'
-
+import Icon from 'react-native-vector-icons/MaterialIcons'
 export default class HomeScreen extends React.Component {
     constructor(props) {
         super(props)
@@ -20,9 +21,17 @@ export default class HomeScreen extends React.Component {
         });
     }
 
-    static navigationOptions = {
+    static navigationOptions = ({ navigation }) => {
+        return {
         title: 'Menu',
-    };
+        headerRight:(<View style={{paddingRight:10}}><Icon.Button
+        name="shopping-cart"
+        backgroundColor = "darkred"
+        style={{paddingLeft:20}}
+        onPress={()=>navigation.navigate("Cart")}
+      /></View>)
+      };
+    }
 
     showToast = () => {
         ToastAndroid.show(
@@ -31,8 +40,18 @@ export default class HomeScreen extends React.Component {
           );
     }
 
-    addItems = () => {
-        items
+    addItems = (id, price) => {
+        var flag = false
+        global.cart.forEach(item => {
+            if (item.name == id){
+                flag = true
+                item.num += 1
+            }
+        });
+        if (!flag){
+            global.cart.push({name:id,price:price,num:1})
+        }
+        this.showToast()
     }
 
     render() {
@@ -53,7 +72,7 @@ export default class HomeScreen extends React.Component {
                             title='Add to Cart'
                             style={styles.btnAddToCart}
                             color='grey'
-                            onPress={() => { navigate('Payment') }}
+                            onPress={() => {this.addItems("Cheeseburger", "4.5")}}
                         />
                     </View>
 
@@ -75,6 +94,7 @@ export default class HomeScreen extends React.Component {
                                 paddingTop: 10
                             }}
                             color='grey'
+                            onPress={() => {this.addItems("Junior Chicken", "4.95")}}
                         />
                     </View>
                     <View style={styles.foodItem}>
@@ -90,6 +110,7 @@ export default class HomeScreen extends React.Component {
                             title='Add to Cart'
                             style={styles.btnAddToCart}
                             color='grey'
+                            onPress={() => {this.addItems("Fries", "2")}}
                         />
                     </View>
                     <View style={styles.foodItem}>
@@ -105,6 +126,7 @@ export default class HomeScreen extends React.Component {
                             title='Add to Cart'
                             style={styles.btnAddToCart}
                             color='grey'
+                            onPress={() => {this.addItems("Drink", "1.99")}}
                         />
                     </View>
                     <View style={styles.foodItem}>
@@ -120,6 +142,7 @@ export default class HomeScreen extends React.Component {
                             title='Add to Cart'
                             style={styles.btnAddToCart}
                             color='grey'
+                            onPress={() => {this.addItems("Apple Pie", "1.29")}}
                         />
                     </View>
                     <View style={styles.foodItem}>
@@ -135,6 +158,7 @@ export default class HomeScreen extends React.Component {
                             title='Add to Cart'
                             style={styles.btnAddToCart}
                             color='grey'
+                            onPress={() => {this.addItems("Chicken Nuggets", "2.99")}}
                         />
                     </View>
                 </Container>

@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { Platform, Button, StyleSheet, Text, View, ScrollView, Image, Modal, TouchableOpacity } from 'react-native';
 import { Container } from 'native-base';
 import styles from "./styles"
-
+import Icon from "react-native-vector-icons/MaterialIcons"
 export default class HomeScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Restaurants',
-    };
-
+    static navigationOptions = ({ navigation }) => {
+        return {
+        title: 'Home',
+        headerRight:(<View style={{paddingRight:10}}><Icon.Button
+        name="shopping-cart"
+        backgroundColor = "darkred"
+        style={{paddingLeft:20}}
+        onPress={()=>navigation.navigate("Cart")}
+      /></View>)
+      };
+    }
+    
     render() {
         const { navigate } = this.props.navigation;
         return (

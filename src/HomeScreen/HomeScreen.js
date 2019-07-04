@@ -10,12 +10,12 @@ import {
   Header,
   Title,
   Left,
-  Icon,
   Right,
   Button as ButtonNB
 } from "native-base";
 import styles from "../styles"
 import { CheckBox } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export default class HomeScreen extends React.Component {
   constructor() {
@@ -33,11 +33,21 @@ export default class HomeScreen extends React.Component {
       quantities: ["2", "3"]
     }
   }
-  static navigationOptions = {
+  
+  static navigationOptions = ({ navigation , state}) => {
+    return {
     title: 'Home',
+    headerRight:(<View style={{paddingRight:10}}><Icon.Button
+    name="shopping-cart"
+    backgroundColor = "darkred"
+    style={{paddingLeft:20}}
+    onPress={()=>navigation.navigate("Cart")}
+  /></View>)
   };
+}
   render() {
     const { navigate } = this.props.navigation;
+    
     return (
       <Container>
         {/* <Header style = {{backgroundColor: "darkred"}}>

@@ -40,6 +40,7 @@ export default styles = StyleSheet.create({
     borderTopWidth: 2,
     borderBottomWidth: 2,
     borderRadius: 5,
+    marginBottom:2,
     flexDirection: 'row',
   },
   cartItemDetails: {
