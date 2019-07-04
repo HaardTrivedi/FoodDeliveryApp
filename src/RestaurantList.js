@@ -6,7 +6,7 @@ import Icon from "react-native-vector-icons/MaterialIcons"
 export default class HomeScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-        title: 'Home',
+        title: 'Restaurants',
         headerRight:(<View style={{paddingRight:10}}><Icon.Button
         name="shopping-cart"
         backgroundColor = "darkred"
@@ -22,15 +22,6 @@ export default class HomeScreen extends React.Component {
 
             <Container>
                 <ScrollView>
-                    {/*                     <Button
-                        title="McDonald's"
-                        titleStyle={{ fontSize: 25 }}
-                        color="darkred"
-                        onPress={() => { navigate('Menu') }}
-                    ></Button>
-                    <Text style={styles.restaurantInfo}>Address</Text>
-                    <Text style={styles.restaurantInfo}>Timing</Text> */}
-
                     <TouchableOpacity style={styles.buttons} onPress={() => { navigate('Menu') }}>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', }}>
                             <View>

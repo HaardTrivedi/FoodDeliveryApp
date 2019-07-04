@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, ToastAndroid, Button, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Container, Card, CardItem, Content, Header, Left, Body, Right, Title } from 'native-base';
-import {Button as ButtonE} from "react-native-elements";
+import { Button as ButtonE } from "react-native-elements";
 import Modal from './CartModal'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 export default class HomeScreen extends React.Component {
@@ -9,9 +9,6 @@ export default class HomeScreen extends React.Component {
         super(props)
         this.state = {
             isOpen: false,
-            items: [],
-            prices: [],
-            quantities: [],
         }
     }
 
@@ -23,35 +20,39 @@ export default class HomeScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-        title: 'Menu',
-        headerRight:(<View style={{paddingRight:10}}><Icon.Button
-        name="shopping-cart"
-        backgroundColor = "darkred"
-        style={{paddingLeft:20}}
-        onPress={()=>navigation.navigate("Cart")}
-      /></View>)
-      };
+            title: 'Menu',
+            headerRight: (<View style={{ paddingRight: 10 }}><Icon.Button
+                name="shopping-cart"
+                backgroundColor="darkred"
+                style={{ paddingLeft: 20 }}
+                onPress={() => navigation.navigate("Cart")}
+            /></View>)
+        };
     }
 
-    showToast = () => {
+    showToast = (text) => {
         ToastAndroid.show(
-            'Item Added to Cart',
+            text,
             ToastAndroid.SHORT,
-          );
+        );
     }
 
     addItems = (id, price) => {
         var flag = false
+        var quantity = 0
         global.cart.forEach(item => {
-            if (item.name == id){
+            if (item.name == id) {
                 flag = true
                 item.num += 1
+                quantity = item.num
             }
         });
-        if (!flag){
-            global.cart.push({name:id,price:price,num:1})
+        if (!flag) {
+            global.cart.push({ name: id, price: price, num: 1 })
+            quantity = 1
         }
-        this.showToast()
+        this.showToast('Item Added to Cart')
+        this.showToast(id + ' in Cart: ' + quantity)
     }
 
     render() {
@@ -72,7 +73,7 @@ export default class HomeScreen extends React.Component {
                             title='Add to Cart'
                             style={styles.btnAddToCart}
                             color='grey'
-                            onPress={() => {this.addItems("Cheeseburger", "4.5")}}
+                            onPress={() => { this.addItems("Cheeseburger", "4.5") }}
                         />
                     </View>
 
@@ -94,7 +95,7 @@ export default class HomeScreen extends React.Component {
                                 paddingTop: 10
                             }}
                             color='grey'
-                            onPress={() => {this.addItems("Junior Chicken", "4.95")}}
+                            onPress={() => { this.addItems("Junior Chicken", "4.95") }}
                         />
                     </View>
                     <View style={styles.foodItem}>
@@ -110,7 +111,7 @@ export default class HomeScreen extends React.Component {
                             title='Add to Cart'
                             style={styles.btnAddToCart}
                             color='grey'
-                            onPress={() => {this.addItems("Fries", "2")}}
+                            onPress={() => { this.addItems("Fries", "2") }}
                         />
                     </View>
                     <View style={styles.foodItem}>
@@ -126,7 +127,7 @@ export default class HomeScreen extends React.Component {
                             title='Add to Cart'
                             style={styles.btnAddToCart}
                             color='grey'
-                            onPress={() => {this.addItems("Drink", "1.99")}}
+                            onPress={() => { this.addItems("Drink", "1.99") }}
                         />
                     </View>
                     <View style={styles.foodItem}>
@@ -142,7 +143,7 @@ export default class HomeScreen extends React.Component {
                             title='Add to Cart'
                             style={styles.btnAddToCart}
                             color='grey'
-                            onPress={() => {this.addItems("Apple Pie", "1.29")}}
+                            onPress={() => { this.addItems("Apple Pie", "1.29") }}
                         />
                     </View>
                     <View style={styles.foodItem}>
@@ -158,9 +159,23 @@ export default class HomeScreen extends React.Component {
                             title='Add to Cart'
                             style={styles.btnAddToCart}
                             color='grey'
-                            onPress={() => {this.addItems("Chicken Nuggets", "2.99")}}
+                            onPress={() => { this.addItems("Chicken Nuggets", "2.99") }}
                         />
                     </View>
+                    <Button
+                        title='Go To Cart'
+                        style={{
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            alignSelf: 'center',
+                            marginTop: 10,
+                            marginBottom: 10,
+                            paddingTop: 10,
+                            paddingBottom: 10
+                        }}
+                        color='darkred'
+                        onPress={() => { navigate('Cart') }}
+                    />
                 </Container>
                 <Modal show={this.state.isOpen}
                     onClose={this.toggleModal}>

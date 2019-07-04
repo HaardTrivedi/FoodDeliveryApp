@@ -34,22 +34,26 @@ export default styles = StyleSheet.create({
     height: 125
   },
   cartItem: {
+    borderColor: "grey",
+    borderTopWidth: 2,
+    borderRadius: 5,
+    marginBottom: 2,
+    flexDirection: 'row',
+  },
+  cartTotal: {
     borderColor: "darkred",
-    borderLeftWidth: 2,
-    borderRightWidth: 2,
     borderTopWidth: 2,
     borderBottomWidth: 2,
     borderRadius: 5,
-    marginBottom:2,
+    marginBottom: 2,
     flexDirection: 'row',
   },
   cartItemDetails: {
     flex: 3,
     borderRightWidth: 2,
-    borderColor: "darkred",
-    //alignContent: "center",
-    //textAlign: 'center',
-    //alignSelf: 'stretch',
+    borderColor: "grey",
+    marginTop: 5,
+    marginBottom: 5
   },
   cartItemCost: {
     flex: 1,
@@ -64,13 +68,16 @@ export default styles = StyleSheet.create({
   },
   itemDetailsText: {
     alignContent: "center",
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 18,
     paddingTop: 5,
     paddingBottom: 5
   },
   costText: {
-    fontSize: 20
+    fontSize: 20,
+    alignContent: "center",
+    textAlign: 'center',
+    justifyContent: "center",
   },
   buttons: {
     backgroundColor: 'darkred',
@@ -146,6 +153,15 @@ export default styles = StyleSheet.create({
   payText: {
     color: 'black',
     marginHorizontal: 10,
+  },
+
+  btnCart: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    width: 50,
+    marginRight: 5,
+    marginLeft: 5,
   },
 
 });
